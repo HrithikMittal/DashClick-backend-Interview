@@ -15,7 +15,7 @@ var userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  dsignation: {
+  designation: {
     type: String,
   },
   workingHours: {
@@ -31,7 +31,7 @@ var userSchema = mongoose.Schema({
       start: { type: Number, min: 0, max: 23 },
       end: { type: Number, min: 0, max: 23 },
     },
-    thusday: {
+    thursday: {
       start: { type: Number, min: 0, max: 23 },
       end: { type: Number, min: 0, max: 23 },
     },

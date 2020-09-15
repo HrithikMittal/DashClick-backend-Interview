@@ -3,6 +3,7 @@ const _ = require("underscore");
 const Admin = require("../models/Admin");
 
 const signupUser = (req, res) => {
+  req.body.password = "password@123";
   if (req.body.email == undefined || req.body.password == undefined) {
     return res.json({ error: "Please provide email and password both" });
   }
@@ -31,7 +32,7 @@ const signupUser = (req, res) => {
 };
 
 const userBydId = (req, res, next, id) => {
-  User.findById(id).exec((user) => {
+  User.findById(id).exec((err, user) => {
     if (!user || err) {
       return res.json({ error: "User Not Found!" });
     }
@@ -51,9 +52,13 @@ const getAllUsers = (req, res) => {
     });
 };
 
+var deep = function (a, b) {
+  return _.isObject(a) && _.isObject(b) ? _.extend(a, b, deep) : b;
+};
+
 const updateUser = (req, res) => {
   let user = req.user;
-  user = _.extend(user, req.body);
+  user = _.extend(user, req.body, deep);
   user
     .save()
     .then((user) => {
@@ -68,7 +73,7 @@ const updateUser = (req, res) => {
 const deleteUser = (req, res) => {
   Admin.deleteOne({ _id: req.user._id })
     .then((user) => {
-      return res.josn({ message: "User delte successfully!", user });
+      return res.json({ message: "User delte successfully!", user });
     })
     .catch((err) => {
       console.log("Error in deleting controller", err);
