@@ -81,7 +81,15 @@ const deleteUser = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  return res.json(req.user);
+  User.findOne({ _id: req.user._id })
+    .populate("tasks")
+    .then((data) => {
+      return res.json(data);
+    })
+    .catch((err) => {
+      console.log("Error in getting user", err);
+      return res.json({ error: err });
+    });
 };
 
 module.exports = {

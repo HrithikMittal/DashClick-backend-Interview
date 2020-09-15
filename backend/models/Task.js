@@ -13,7 +13,7 @@ const taskSchema = mongoose.Schema({
   dueDate: {
     type: Date,
   },
-  userId: {
+  user: {
     type: ObjectId,
     ref: "User",
   },

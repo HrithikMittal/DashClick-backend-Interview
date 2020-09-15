@@ -15,6 +15,7 @@ router.get("/getAllUsers", userController.getAllUsers);
 router.get("/getUser/:userId", userController.getUser);
 
 router.post("/createTask", taskController.createTask);
+router.put("/addUser/:taskId/:userId", taskController.addUserToTask);
 router.put("/updateTask/:taskId", taskController.updateTask);
 router.delete("/deleteTask/:taskId", taskController.deleteTask);
 router.get("/getAllTasks", taskController.getAllTasks);
