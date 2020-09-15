@@ -52,6 +52,10 @@ const taskSchema = mongoose.Schema({
       end: { type: Number, min: 0, max: 23 },
     },
   },
+  active: {
+    type: Boolean,
+    default: 1,
+  },
 });
 
 module.exports = Task = mongoose.model("Task", taskSchema);
