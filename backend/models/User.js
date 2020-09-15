@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const uuid = require("uuid");
 const crypto = require("crypto");
+const { ObjectId } = mongoose.Schema;
 
 var userSchema = mongoose.Schema({
   email: {
@@ -48,6 +49,12 @@ var userSchema = mongoose.Schema({
       end: { type: Number, min: 0, max: 23 },
     },
   },
+  tasks: [
+    {
+      type: ObjectId,
+      ref: "Task",
+    },
+  ],
 });
 
 userSchema

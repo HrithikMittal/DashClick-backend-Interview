@@ -18,10 +18,19 @@ const addUserToTask = (req, res) => {
   let task = req.task;
   let user = req.user;
   task.userId = user;
+  user.tasks.push(task);
   task
     .save()
     .then((data) => {
-      res.json({ message: "User is added successfully!", data });
+      user
+        .save()
+        .then((user) => {
+          res.json({ message: "User is added successfully!", data });
+        })
+        .catch((err) => {
+          console.log("Error in adding the task to the user", err);
+          res.json({ error: "Error in adding the task to the user" });
+        });
     })
     .catch((err) => {
       console.log("Error in adding user to task", err);
