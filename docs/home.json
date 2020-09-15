@@ -1,3 +1,19 @@
 {
-  "/": "GET: all the routes information"
+  "/": "GET: all the routes information",
+
+  "/admin/signup": "POST: Signup as a admin",
+  "/admin/login": "POST: login as a admin",
+
+  "/admin/createUser": "POST: create a user",
+  "/admin/updateUser/:userId": "PUT: update the user profile",
+  "/admin/deleteUser/:userId": "DELETE: delete the user profile",
+  "/admin/getAllUsers": "GET: all the users",
+  "/admin/getUser/:userId": "GET: the particular user",
+
+  "/admin/createTask": "POST: create a task",
+  "/admin/addUser/:taskId/:userId": "PUT: add user to the task",
+  "/admin/updateTask/:taskId": "PUT: update a task",
+  "/admin/deleteTask/:taskId": "DELETE: delete a task",
+  "/admin/getAllTasks": "GET: get all the tasks",
+  "/admin/getTask/:taskId": "GET: the particular task"
 }
