@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const _ = require("underscore");
-const Admin = require("../models/Admin");
 
 const signupUser = (req, res) => {
   req.body.password = "password@123";
@@ -71,7 +70,7 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  Admin.deleteOne({ _id: req.user._id })
+  User.findByIdAndDelete(req.user._id)
     .then((user) => {
       return res.json({ message: "User delte successfully!", user });
     })
