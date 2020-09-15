@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const _ = require("underscore");
+const Admin = require("../models/Admin");
 
 const signupUser = (req, res) => {
   if (req.body.email == undefined || req.body.password == undefined) {
@@ -64,8 +65,25 @@ const updateUser = (req, res) => {
     });
 };
 
+const deleteUser = (req, res) => {
+  Admin.deleteOne({ _id: req.user._id })
+    .then((user) => {
+      return res.josn({ message: "User delte successfully!", user });
+    })
+    .catch((err) => {
+      console.log("Error in deleting controller", err);
+    });
+};
+
 const getUser = (req, res) => {
   return res.json(req.user);
 };
 
-module.exports = { signupUser, userBydId, getAllUsers, updateUser, getUser };
+module.exports = {
+  signupUser,
+  userBydId,
+  getAllUsers,
+  updateUser,
+  getUser,
+  deleteUser,
+};
