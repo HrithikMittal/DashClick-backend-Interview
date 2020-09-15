@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const port = process.env.PORT;
 
 mongoose
@@ -18,9 +19,11 @@ mongoose
     console.log("Error in connecting to the DB", err);
   });
 
+app.use(cors());
 app.use(bodyParser.json());
 
 const adminRoute = require("./routes/Admin");
+
 app.use("/admin", adminRoute);
 
 const docs = require("./docs/home.json");
