@@ -20,14 +20,14 @@ const addUserToTask = (req, res) => {
   let task = req.task;
   let user = req.user;
   task.user = user;
-  if (user.tasks.indexOf(task._id) === -1) {
-    user.tasks.push(task);
+  if (user.tasks.length == 0 || user.tasks.indexOf(task._id) === -1) {
+    user.tasks.push(task._id);
   }
   Task.findByIdAndUpdate(task._id, task)
     .then((data) => {
-      User.findByIdAndUpdate(user._id, user)
+      user
+        .save()
         .then((e) => {
-          console.log(e);
           res.json({ message: "User is added successfully!", data });
         })
         .catch((err) => {
