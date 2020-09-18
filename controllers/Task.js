@@ -18,13 +18,16 @@ const addUserToTask = (req, res) => {
   let task = req.task;
   let user = req.user;
   task.user = user;
-  user.tasks = _.union(user.tasks, task);
+  if (user.tasks.indexOf(task._id) === -1) {
+    user.tasks.push(task);
+  }
   task
     .save()
     .then((data) => {
       user
         .save()
-        .then(() => {
+        .then((e) => {
+          console.log(e);
           res.json({ message: "User is added successfully!", data });
         })
         .catch((err) => {
