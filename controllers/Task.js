@@ -67,7 +67,7 @@ const taskById = (req, res, next, id) => {
 };
 
 const deleteTask = (req, res) => {
-  Task.findOneAndUpdate(req.task._id, { active: 0 })
+  Task.findByIdAndDelete(req.task._id)
     .then(() => {
       return res.json({ message: "Task deleted successfully" });
     })
