@@ -1,5 +1,7 @@
 const _ = require("underscore");
+
 const Task = require("../models/Task");
+const User = require("../models/User");
 
 const createTask = (req, res) => {
   const newTask = new Task(req.body);
@@ -21,11 +23,9 @@ const addUserToTask = (req, res) => {
   if (user.tasks.indexOf(task._id) === -1) {
     user.tasks.push(task);
   }
-  task
-    .save()
+  Task.findByIdAndUpdate(task._id, task)
     .then((data) => {
-      user
-        .save()
+      User.findByIdAndUpdate(user._id, user)
         .then((e) => {
           console.log(e);
           res.json({ message: "User is added successfully!", data });
