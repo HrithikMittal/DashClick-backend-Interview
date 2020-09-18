@@ -57,8 +57,12 @@ const updateTask = (req, res) => {
 };
 
 const taskById = (req, res, next, id) => {
+  console.log(id);
   Task.findById(id).exec((err, task) => {
     if (!task || err) {
+      console.log(task);
+
+      console.log(err);
       return res.json({ error: "Task Not found!" });
     }
     req.task = task;
@@ -73,6 +77,20 @@ const deleteTask = (req, res) => {
     })
     .catch((err) => {
       console.log("Error in deleting the task", err);
+      res.json({ error: err });
+    });
+};
+
+const removeUser = (req, res) => {
+  var task = req.task;
+  task.user = undefined;
+  task
+    .save()
+    .then(() => {
+      return res.json({ message: "Task updated successfully" });
+    })
+    .catch((err) => {
+      console.log("Error in updating the task", err);
       res.json({ error: err });
     });
 };
@@ -101,4 +119,5 @@ module.exports = {
   getAllTasks,
   getTask,
   deleteTask,
+  removeUser,
 };

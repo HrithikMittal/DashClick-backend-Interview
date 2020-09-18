@@ -20,6 +20,7 @@ router.put("/updateTask/:taskId", taskController.updateTask);
 router.delete("/deleteTask/:taskId", taskController.deleteTask);
 router.get("/getAllTasks", taskController.getAllTasks);
 router.get("/getTask/:taskId", taskController.getTask);
+router.delete("/removeUser/:taskId", taskController.removeUser);
 
 router.param("userId", userController.userBydId);
 router.param("taskId", taskController.taskById);
