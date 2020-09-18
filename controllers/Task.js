@@ -79,6 +79,7 @@ const deleteTask = (req, res) => {
 
 const getAllTasks = (req, res) => {
   Task.find()
+    .populate("user")
     .then((tasks) => {
       return res.json({ message: "Getting all the tasks", tasks });
     })
